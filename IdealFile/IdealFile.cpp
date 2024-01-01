@@ -4,8 +4,7 @@
 
 using namespace std;
 
-
-class xFile
+class IdealFile
 {
 public:
 	// About Files
@@ -24,16 +23,15 @@ private:
 	fstream cufile;
 	string fname; // 方便重载
 
-	// 为了对标行号，[0] 为空行；
 	// 使用 vector 是为了处理不定长、不定行的文本；
 	// 这里的 cufile 仅读取一次，随后闲置等待写入；
 	// 
-	// 不定长的数组放在 class 的最后。
+	// 不定长的 vector 放在 class 的最后。
 	vector<string> content;
 };
 
 
-void xFile::open(string filename)
+void IdealFile::open(string filename)
 {
 	cufile.open(filename, ios::in);
 	fname = filename;
@@ -49,12 +47,12 @@ void xFile::open(string filename)
 	cufile.open(filename, ios::out | ios::in);
 }
 
-void xFile::close()
+void IdealFile::close()
 {
 	cufile.close();
 }
 
-string xFile::getcontent()
+string IdealFile::getcontent()
 {
 	string s;
 	for (int i = 0; i < content.size(); ++i)
@@ -65,30 +63,31 @@ string xFile::getcontent()
 }
 
 
-string xFile::getbyline(int line)
+string IdealFile::getbyline(int line)
 {
 	return content[line];
 }
 
-void xFile :: delline(int line)
+void IdealFile :: delline(int line)
 {
 	content.erase(content.begin() + line - 1);
 }
 
-void xFile :: addatline(int line, string text)
+void IdealFile :: addatline(int line, string text)
 {
 	content.insert(content.begin() + line - 1, text);
 }
 
 
-void xFile :: save()
+void IdealFile :: save()
 {
 	cufile << getcontent();
 }
 
-void xFile :: exit()
+void IdealFile :: exit()
 {
 	save();
 	close();
 }
+
 
