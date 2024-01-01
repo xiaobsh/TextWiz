@@ -19,6 +19,7 @@ public:
 	std::string getbyline(int line);
 	void delline(int line);
 	void addatline(int line, std::string text);
+	~TextWiz();
 
 private:
 	std::fstream cufile;
@@ -103,3 +104,10 @@ char* getTime()
 	strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", &p_tm);
 	return tmp;
 }
+
+
+TextWiz::~TextWiz()
+{
+	cufile.close();
+}
+

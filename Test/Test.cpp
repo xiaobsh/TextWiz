@@ -4,21 +4,10 @@
 
 using namespace std;
 
-TextWiz* p_tw;
-
-void exitfunc()
-{
-	// (*Arg).close();
-	p_tw -> close();
-}
-
-
 int main()
 {
 	TextWiz F;
-	p_tw = &F;
 	F.open("hosts");
-	atexit(exitfunc);
 
 	int choice;
 	cout << "Test Program for TextWiz by xiaobsh" << endl;
@@ -78,7 +67,5 @@ int main()
 	}
 
 	F.close();
-	// F.exit();
-	// system("pause");
 	return 0;
 }
