@@ -6,7 +6,7 @@ using namespace std;
 
 TextWiz* p_tw;
 
-void exitfunc()
+void exitfunc(void)
 {
 	// (*Arg).close();
 	p_tw -> close();
