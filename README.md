@@ -1,6 +1,9 @@
-# IdealFile
+# TextWiz
 
-IdealFile is a C++ module that extends the functionality of file processing. The author is a Chinese student.
+## Introduction
+TextWiz is a C++ module that extends the functionality of file processing. The author is a student.
 
-It uses the GPL-2.0 License.
+## License
+
+The code is licensed under GPL v2.0. For more details, read the [LICENSE](./LICENSE) file.
 
