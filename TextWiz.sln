@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{3B797285-3177-43D6-A43D-CB5470DEB737}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Main", "Main\Main.vcxproj", "{AEDE9934-2DDC-475F-B9ED-908F440E600D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextWiz", "TextWiz\TextWiz.vcxproj", "{AEDE9934-2DDC-475F-B9ED-908F440E600D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
