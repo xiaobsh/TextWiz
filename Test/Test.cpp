@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\..\IdealFile\IdealFile.cpp"
+#include ".\..\Main\IdealFile.cpp"
 
 using namespace std;
 
