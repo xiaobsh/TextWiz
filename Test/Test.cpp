@@ -77,6 +77,7 @@ int main()
 		choice = _getch(); cout << choice - '0' << endl;
 	}
 
+	F.close();
 	// F.exit();
 	// system("pause");
 	return 0;
