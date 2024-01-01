@@ -12,7 +12,7 @@ int main()
 	F.addatline(2, "Testing!!!");
 	cout << F.getbyline(2) << endl;
 	F.delline(3);
-	cout << F.getcontent() << "###@EOF" << endl;
+	cout << "--------------------" << F.getcontent() << "###@EOF" << endl;
 	F.save();
 	F.close();
 	system("pause");
