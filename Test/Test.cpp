@@ -22,7 +22,7 @@ int main()
 		case 1:
 		{
 			cout << "================================Beginning================================" << endl;
-			cout << F.get_current_content() << endl;
+			cout << F.GetCurrentContent() << endl;
 			cout << "==================================Ending==================================" << endl;
 			break;
 		}
@@ -33,7 +33,7 @@ int main()
 			cout << "Please enter the line number: ";
 			cin >> line;
 			cout << "================================Beginning================================" << endl;
-			cout << F.getbyline(line) << endl;
+			cout << F.GetByLine(line) << endl;
 			cout << "==================================Ending==================================" << endl;
 			break;
 		}
@@ -45,7 +45,7 @@ int main()
 			cin >> line;
 			cout << "To add: ";
 			cin >> s;
-			F.addatline(line, s);
+			F.AddAtLine(line, s);
 			break;
 		}
 		case 4:
@@ -54,7 +54,7 @@ int main()
 			string s;
 			cout << "Please enter the line number: ";
 			cin >> line;
-			F.delline(line);
+			F.DelLine(line);
 			break;
 		}
 		case 5: F.save(); break;
