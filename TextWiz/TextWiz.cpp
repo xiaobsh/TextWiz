@@ -1,47 +1,11 @@
-//#include "TextWiz.h"
+#include "TextWiz.h"
+#include "pch.hpp"
 #include <string>
 #include <fstream>
 #include <vector>
 #include <ctime>
 
-
-class TextWiz
-{
-public:
-	TextWiz() {};
-	TextWiz(std::string FileName) { open(FileName); };
-	~TextWiz();
-
-	// Data
-	struct TextWiz_Position
-	{
-		uint32_t line, column;
-	};
-	std::vector<TextWiz_Position> SearchResult;
-
-	// Files
-	void open(std::string FileName); // r + w
-	void close(); // 不使用析构函数是为了便于再次打开其他的文件。close 不会自动保存，exit 实现了保存退出。
-	std::string GetCurrentContent();
-	void save();
-	void exit();
-
-	// Lines
-	std::string GetByLine(int line);
-	void DelLine(int line);
-	void AddAtLine(int line, std::string text);
-
-	// Text
-	bool SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults); // You can define the variable to save results by using `std::vector<TextWiz::TextWiz_Position> VectorToSaveResults`
-
-private:
-	std::fstream cuFile;
-	std::string fName; // make it easier to overload
-
-	// 不定长的 vector 放在 class 的最后。
-	std::vector<std::string> content;
-};
-
+TextWiz::TextWiz(std::string FileName) { open(FileName); }
 
 void TextWiz::open(std::string FileName)
 {
@@ -55,10 +19,7 @@ void TextWiz::open(std::string FileName)
 	cuFile.close();
 }
 
-void TextWiz::close()
-{
-	cuFile.close();
-}
+void TextWiz::close() { cuFile.close(); }
 
 std::string TextWiz::GetCurrentContent()
 {
@@ -92,7 +53,7 @@ void TextWiz::save()
 	cuFile.close();
 }
 
-void TextWiz :: exit()
+void TextWiz::exit()
 {
 	save();
 	close();
@@ -111,14 +72,56 @@ std::string TextWiz_GetTime(const char* FormatStr)
 	return tmp;
 }
 
-bool TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults)
+std::string TextWiz_GetTime_Milliseconds()
 {
-	return false;
+	try
+	{
+		struct timeval curTime;
+		gettimeofday(&curTime, NULL);
+		int milli = curTime.tv_usec / 1000;
+
+		char buffer[80] = { 0 };
+		struct tm nowTime;
+		long long t_tmp = curTime.tv_sec;
+		localtime_r(&t_tmp, &nowTime);
+		strftime(buffer, sizeof(buffer), "%F %T", &nowTime);
+
+		char currentTime[84] = { 0 };
+		snprintf(currentTime, sizeof(currentTime), "%s.%03d", buffer, milli);
+
+		return currentTime;
+	}
+	catch (...)
+	{
+		return "";
+	}
 }
 
 
-TextWiz::~TextWiz()
+int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults)
 {
-	cuFile.close();
+	VectorToSaveResults.clear();
+	int count = 0;
+	TextWiz_Position pos(0, 0);
+	for (pos.line = 0; pos.line < content.size(); ++pos.line)
+	{
+		pos.column = 0;
+		while ((pos.column = content[pos.line].find(TextToSearch, pos.column)) != std::string::npos)
+		{
+			VectorToSaveResults.push_back(pos);
+			count++;
+			pos.column++;
+		}
+	}
+	return count;
 }
+
+
+TextWiz::~TextWiz() { cuFile.close(); }
+
+
+TextWiz_Logger::TextWiz_Logger(std::string FileName) { open(FileName); }
+void TextWiz_Logger::open(std::string FileName) { cuFile.open(FileName, std::ios::app); }
+void TextWiz_Logger::append(std::string Text) { cuFile << Text; }
+void TextWiz_Logger::close() { cuFile.close(); }
 

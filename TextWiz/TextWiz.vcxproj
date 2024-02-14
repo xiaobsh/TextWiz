@@ -144,6 +144,7 @@
     <ClCompile Include="TextWiz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pch.hpp" />
     <ClInclude Include="TextWiz.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
