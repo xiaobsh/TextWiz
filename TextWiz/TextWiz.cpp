@@ -1,15 +1,26 @@
+//#include "TextWiz.h"
 #include <string>
 #include <fstream>
 #include <vector>
 #include <ctime>
 
-// using namespace std;
 
 class TextWiz
 {
 public:
-	// About Files
-	void open(std::string filename); // r + w 读写
+	TextWiz() {};
+	TextWiz(std::string FileName) { open(FileName); };
+	~TextWiz();
+
+	// Data
+	struct TextWiz_Position
+	{
+		uint32_t line, column;
+	};
+	std::vector<TextWiz_Position> SearchResult;
+
+	// Files
+	void open(std::string FileName); // r + w
 	void close(); // 不使用析构函数是为了便于再次打开其他的文件。close 不会自动保存，exit 实现了保存退出。
 	std::string GetCurrentContent();
 	void save();
@@ -19,15 +30,14 @@ public:
 	std::string GetByLine(int line);
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
-	~TextWiz();
+
+	// Text
+	bool SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults); // You can define the variable to save results by using `std::vector<TextWiz::TextWiz_Position> VectorToSaveResults`
 
 private:
 	std::fstream cuFile;
-	std::string fName; // 方便重载
+	std::string fName; // make it easier to overload
 
-	// 使用 vector 是为了处理不定长、不定行的文本；
-	// 这里的 cuFile 仅读取一次，随后闲置等待写入；
-	// 
 	// 不定长的 vector 放在 class 的最后。
 	std::vector<std::string> content;
 };
@@ -66,12 +76,12 @@ std::string TextWiz::GetByLine(int Line)
 
 void TextWiz::DelLine(int Line)
 {
-	content.erase(content.begin() + Line - 1);
+	content.erase(content.begin() + (Line - 1));
 }
 
 void TextWiz::AddAtLine(int Line, std::string Text)
 {
-	content.insert(content.begin() + Line - 1, Text);
+	content.insert(content.begin() + (Line - 1), Text);
 }
 
 
@@ -89,7 +99,7 @@ void TextWiz :: exit()
 }
 
 
-char* TextWiz_GetTime(const char* FormatStr)
+std::string TextWiz_GetTime(const char* FormatStr)
 {
 	time_t p_time;
 	tm p_tm;
@@ -97,7 +107,13 @@ char* TextWiz_GetTime(const char* FormatStr)
 	char tmp[256];
 	localtime_s(&p_tm, &p_time);
 	strftime(tmp, sizeof(tmp), FormatStr, &p_tm); // "%Y-%m-%d %H:%M:%S"
+	std::string s = tmp;
 	return tmp;
+}
+
+bool TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults)
+{
+	return false;
 }
 
 
