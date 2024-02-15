@@ -18,10 +18,13 @@ public:
 	// Data
 	struct TextWiz_Position
 	{
-		unsigned int line, column;
-		TextWiz_Position(unsigned int line, unsigned int column) : line(line), column(column) { }
+		size_t line, column;
+		TextWiz_Position(size_t line, size_t column) : line(line), column(column) { }
+		void fill(size_t Line, size_t Column)
+		{
+			line = Line; column = Column;
+		}
 	};
-	std::vector<TextWiz_Position> SearchResult;
 
 	// Files
 	void open(std::string FileName);

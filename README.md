@@ -12,8 +12,20 @@ A class named TextWiz is defined in TextWiz.cpp. The public members are as follo
 class TextWiz
 {
 public:
-	// About Files
-	void open(std::string filename);
+	TextWiz();
+	TextWiz(std::string FileName);
+	~TextWiz();
+
+	// Data
+	struct TextWiz_Position
+	{
+		size_t line, column;
+		TextWiz_Position(size_t line, size_t column) : line(line), column(column) { }
+		void fill(size_t Line, size_t Column);
+	};
+
+	// Files
+	void open(std::string FileName);
 	void close();
 	std::string GetCurrentContent();
 	void save();
@@ -23,8 +35,27 @@ public:
 	std::string GetByLine(int line);
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
-	~TextWiz();
+
+	// Text
+	// You can define the variable to save results by using `std::vector<TextWiz::TextWiz_Position> VectorToSaveResults`
+	int SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults);
 };
+
+class TextWiz_Logger
+{
+public:
+	TextWiz_Logger();
+	TextWiz_Logger(std::string FileName);
+	~TextWiz_Logger();
+	void open(std::string FileName);
+	void append(std::string Text);
+	void close();
+};
+
+std::string TextWiz_GetTime(const char* FormatStr);
+std::string TextWiz_GetTime_Milliseconds();
+
+
 ```
 
 It can
@@ -32,7 +63,7 @@ It can
 - Get the text in a line by line number.
 - to delete a specific line for which you give the line number.
 - Adds text on a specific line, pushing down the original content of the line and the content below it.
-- Get the formatted time string by using `TextWiz_GetTime("%Y-%m-%d %H:%M:%S")`. Please refer to the strftime() function for the available format control strings.
+- Get the formatted time string by using `TextWiz_GetTime("%F %T")`. Please refer to the strftime() function for the available format control strings.
 
 
 ## License

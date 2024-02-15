@@ -37,12 +37,12 @@ std::string TextWiz::GetByLine(int Line)
 
 void TextWiz::DelLine(int Line)
 {
-	content.erase(content.begin() + (Line - 1));
+	if (Line > 0) content.erase(content.begin() + (Line - 1));
 }
 
 void TextWiz::AddAtLine(int Line, std::string Text)
 {
-	content.insert(content.begin() + (Line - 1), Text);
+	if (Line > 0) content.insert(content.begin() + (Line - 1), Text);
 }
 
 
@@ -103,15 +103,27 @@ int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>&
 	VectorToSaveResults.clear();
 	int count = 0;
 	TextWiz_Position pos(0, 0);
-	for (pos.line = 0; pos.line < content.size(); ++pos.line)
+	size_t line = 0, column = 0;
+	for (line = 0; line < content.size(); line++)
 	{
-		pos.column = 0;
-		while ((pos.column = content[pos.line].find(TextToSearch, pos.column)) != std::string::npos)
+		column = 0;
+		while (column < content[line].length())
+		{
+			if ((column = content[line].find(TextToSearch, column)) == std::string::npos) break;
+			pos.fill(line + 1, column);
+			VectorToSaveResults.push_back(pos);
+			count++;
+			column++;
+		}
+		/*while
+			((pos.column < content[pos.line].length() - 2)
+			&&
+			((pos.column = content[pos.line].find(TextToSearch, pos.column)) != std::string::npos))
 		{
 			VectorToSaveResults.push_back(pos);
 			count++;
 			pos.column++;
-		}
+		}*/
 	}
 	return count;
 }
