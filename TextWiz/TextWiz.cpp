@@ -28,7 +28,6 @@ std::string TextWiz::GetCurrentContent()
 	return s;
 }
 
-
 std::string TextWiz::GetByLine(int Line)
 {
 	if (Line < 1) return "";
@@ -45,7 +44,6 @@ void TextWiz::AddAtLine(int Line, std::string Text)
 	if (Line > 0) content.insert(content.begin() + (Line - 1), Text);
 }
 
-
 void TextWiz::save()
 {
 	cuFile.open(fName, std::ios::out | std::ios::in);
@@ -58,7 +56,6 @@ void TextWiz::exit()
 	save();
 	close();
 }
-
 
 std::string TextWiz_GetTime(const char* FormatStr)
 {
@@ -97,8 +94,7 @@ std::string TextWiz_GetTime_Milliseconds()
 	}
 }
 
-
-int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults)
+int TextWiz::FindTextInEachLine(std::string Text, std::vector<TextWiz_Position>& VectorToSaveResults)
 {
 	VectorToSaveResults.clear();
 	int count = 0;
@@ -109,7 +105,7 @@ int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>&
 		column = 0;
 		while (column < content[line].length())
 		{
-			if ((column = content[line].find(TextToSearch, column)) == std::string::npos) break;
+			if ((column = content[line].find(Text, column)) == std::string::npos) break;
 			pos.fill(line + 1, column);
 			VectorToSaveResults.push_back(pos);
 			count++;
@@ -118,7 +114,7 @@ int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>&
 		/*while
 			((pos.column < content[pos.line].length() - 2)
 			&&
-			((pos.column = content[pos.line].find(TextToSearch, pos.column)) != std::string::npos))
+			((pos.column = content[pos.line].find(text, pos.column)) != std::string::npos))
 		{
 			VectorToSaveResults.push_back(pos);
 			count++;
@@ -128,6 +124,45 @@ int TextWiz::SearchText(std::string TextToSearch, std::vector<TextWiz_Position>&
 	return count;
 }
 
+int TextWiz::ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, std::vector<TextWiz::TextWiz_Position>& VectorToSaveResults)
+{
+	VectorToSaveResults.clear();
+	int count = 0;
+	TextWiz_Position pos(0, 0);
+	size_t line = 0, column = 0;
+	for (line = 0; line < content.size(); line++)
+	{
+		column = 0;
+		while (column < content[line].length())
+		{
+			if ((column = content[line].find(TextToFind, column)) == std::string::npos) break;
+			content[line].replace(column, TextToFind.length(), Subtext);
+			pos.fill(line + 1, column);
+			VectorToSaveResults.push_back(pos);
+			count++;
+			column++;
+		}
+	}
+	return count;
+}
+
+int TextWiz::ReplaceTextInEachLine(std::string TextToFind, std::string Subtext)
+{
+	int count = 0;
+	size_t line = 0, column = 0;
+	for (line = 0; line < content.size(); line++)
+	{
+		column = 0;
+		while (column < content[line].length())
+		{
+			if ((column = content[line].find(TextToFind, column)) == std::string::npos) break;
+			content[line].replace(column, TextToFind.length(), Subtext);
+			count++;
+			column++;
+		}
+	}
+	return count;
+}
 
 TextWiz::~TextWiz() { cuFile.close(); }
 

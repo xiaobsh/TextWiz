@@ -16,6 +16,7 @@ public:
 	~TextWiz();
 
 	// Data
+	// You could define a variable to save results by using `std::vector<TextWiz::TextWiz_Position> variableName`
 	struct TextWiz_Position
 	{
 		size_t line, column;
@@ -38,8 +39,10 @@ public:
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
 
-	// Text
-	int SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults); // You can define the variable to save results by using `std::vector<TextWiz::TextWiz_Position> VectorToSaveResults`
+	// Line text
+	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults);
+	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, std::vector<TextWiz_Position>& VectorToSaveResults);
+	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext); 
 
 private:
 	std::fstream cuFile;
@@ -61,7 +64,7 @@ private:
 	std::fstream cuFile;
 };
 
-std::string TextWiz_GetTime(const char* FormatStr);
+std::string TextWiz_GetTime(const char* FormatStr = "%F %T");
 std::string TextWiz_GetTime_Milliseconds();
 
 #endif

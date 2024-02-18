@@ -6,7 +6,7 @@ TextWiz is a C++ module that extends the functionality of file processing. The a
 ## Features
 The most basic file line processing functions.
 
-A class named TextWiz is defined in TextWiz.cpp. The public members are as follows:
+All public interfaces of the module are as follows:
 ```cpp
 
 class TextWiz
@@ -17,6 +17,7 @@ public:
 	~TextWiz();
 
 	// Data
+	// You could define a variable to save results by using `std::vector<TextWiz::TextWiz_Position> variableName`
 	struct TextWiz_Position
 	{
 		size_t line, column;
@@ -36,9 +37,10 @@ public:
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
 
-	// Text
-	// You can define the variable to save results by using `std::vector<TextWiz::TextWiz_Position> VectorToSaveResults`
-	int SearchText(std::string TextToSearch, std::vector<TextWiz_Position>& VectorToSaveResults);
+	// Line text
+	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults);
+	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, std::vector<TextWiz_Position>& VectorToSaveResults);
+	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext); 
 };
 
 class TextWiz_Logger
@@ -52,7 +54,7 @@ public:
 	void close();
 };
 
-std::string TextWiz_GetTime(const char* FormatStr);
+std::string TextWiz_GetTime(const char* FormatStr = "%F %T");
 std::string TextWiz_GetTime_Milliseconds();
 
 
@@ -64,6 +66,7 @@ It can
 - to delete a specific line for which you give the line number.
 - Adds text on a specific line, pushing down the original content of the line and the content below it.
 - Get the formatted time string by using `TextWiz_GetTime("%F %T")`. Please refer to the strftime() function for the available format control strings.
+- Customize a logger to write a journal.
 
 
 ## License
