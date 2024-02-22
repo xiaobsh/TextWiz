@@ -45,7 +45,9 @@ public:
 	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, std::vector<TextWiz_Position>& VectorToSaveResults);
 	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext); 
 };
+```
 
+```cpp
 class TextWiz_Logger
 {
 public:
@@ -56,10 +58,11 @@ public:
 	void append(std::string Text);
 	void close();
 };
+```
 
+```cpp
 std::string TextWiz_GetTime(const char* FormatStr = "%F %T");
 std::string TextWiz_GetTime_Milliseconds();
-
 
 ```
 
@@ -70,6 +73,15 @@ It can
 - Adds text on a specific line, pushing down the original content of the line and the content below it.
 - Get the formatted time string by using `TextWiz_GetTime("%F %T")`. Please refer to the strftime() function for the available format control strings.
 - Customize a logger to write a journal.
+
+
+## Compile Test Project
+
+### Windows
+Open `TextWiz.sln` in Visual Studio and it's easy to compile the test project. I have used `hosts` as the test file, but you can use any txt file for testing. Don't forget to rename your file to `hosts` if you haven't changed the code.
+
+### Linux
+Leave the .sln file aside. It has nothing to do with you. You can just run `g++ Test/Test.cpp TextWiz/TextWiz.cpp TextWiz/pch.hpp -o {TargetName}` to compile it. It uses the `hosts` file as well.
 
 
 ## License

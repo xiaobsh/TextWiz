@@ -1,11 +1,12 @@
-#pragma once
+// #pragma once
 
 #ifndef __TEXTWIZ_STDAFX_INCLUDED_BY_XIAOBSH
 #define __TEXTWIZ_STDAFX_INCLUDED_BY_XIAOBSH
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined(WINNT) || defined(__WINNT) || defined(__WINNT__) || defined(__WIN64) || defined(_WIN64)
 // Windows
 #include <Windows.h>
+#define LONG_INTEGER long long
 int gettimeofday(struct timeval* tp, void* tzp)
 {
 	time_t clock;
@@ -31,9 +32,10 @@ errno_t localtime_r(const time_t* timep, struct tm* result)
 	return localtime_s(result, timep);
 }
 
-#elif defined(__linux__) || defined(__gnu_linux__) || defined(linux)
-// linux
+#elif defined(__linux__) || defined(__gnu_linux__) || defined(linux) || defined(__linux)
+// Linux
 #include <sys/time.h>
+#define LONG_INTEGER long
 #endif
 
 #endif

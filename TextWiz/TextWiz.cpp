@@ -14,7 +14,7 @@ void TextWiz::open(std::string FileName)
 	fName = FileName;
 	content.clear();
 
-	// ‘§∂¡»°
+	// Pre-load
 	std::string s;
 	while (getline(cuFile, s)) content.push_back(s);
 	cuFile.close();
@@ -74,7 +74,7 @@ std::string TextWiz_GetTime(const char* FormatStr)
 	tm p_tm;
 	time(&p_time);
 	char tmp[256];
-	localtime_s(&p_tm, &p_time);
+	localtime_r(&p_time, &p_tm);
 	strftime(tmp, sizeof(tmp), FormatStr, &p_tm); // "%Y-%m-%d %H:%M:%S"
 	std::string s = tmp;
 	return tmp;
@@ -90,7 +90,7 @@ std::string TextWiz_GetTime_Milliseconds()
 
 		char buffer[80] = { 0 };
 		struct tm nowTime;
-		long long t_tmp = curTime.tv_sec;
+		LONG_INTEGER t_tmp = curTime.tv_sec;
 		localtime_r(&t_tmp, &nowTime);
 		strftime(buffer, sizeof(buffer), "%F %T", &nowTime);
 
@@ -122,15 +122,6 @@ int TextWiz::FindTextInEachLine(std::string Text, std::vector<TextWiz_Position>&
 			count++;
 			column++;
 		}
-		/*while
-			((pos.column < content[pos.line].length() - 2)
-			&&
-			((pos.column = content[pos.line].find(text, pos.column)) != std::string::npos))
-		{
-			VectorToSaveResults.push_back(pos);
-			count++;
-			pos.column++;
-		}*/
 	}
 	return count;
 }
