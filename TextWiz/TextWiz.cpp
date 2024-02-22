@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <ctime>
+#include <algorithm>
 
 TextWiz::TextWiz(std::string FileName) { open(FileName); }
 
@@ -42,6 +43,16 @@ void TextWiz::DelLine(int Line)
 void TextWiz::AddAtLine(int Line, std::string Text)
 {
 	if (Line > 0) content.insert(content.begin() + (Line - 1), Text);
+}
+
+void TextWiz::clear()
+{
+	cuFile.clear();
+}
+
+void TextWiz::SwapLines(int Line_1, int Line_2)
+{
+	std::iter_swap(content.begin() + (Line_1 - 1), content.begin() + (Line_2 - 1));
 }
 
 void TextWiz::save()
@@ -171,4 +182,5 @@ TextWiz_Logger::TextWiz_Logger(std::string FileName) { open(FileName); }
 void TextWiz_Logger::open(std::string FileName) { cuFile.open(FileName, std::ios::app); }
 void TextWiz_Logger::append(std::string Text) { cuFile << Text; }
 void TextWiz_Logger::close() { cuFile.close(); }
+
 

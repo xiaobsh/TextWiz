@@ -18,7 +18,7 @@ int main()
 	int choice;
 	cout << "Test Program for TextWiz by xiaobsh" << endl <<endl;
 	cout << "Time: " << TextWiz_GetTime("%F %T") << endl;
-	cout << "0 Exit\t\t1 Get content\t2 Get by line\n3 Add a line\t4 Delete a line\t5 Save to file\n6 Search text\t7 Replace text" << endl << "Please enter your choice: ";
+	cout << "0 Exit\t\t1 Get content\t2 Get by line\n3 Add a line\t4 Delete a line\t5 Save to file\n6 Search text\t7 Replace text\t8 Swap lines" << endl << "Please enter your choice: ";
 	// cin >> choice;
 	choice = _getch(); cout << choice - '0' << endl;
 	logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: User entered '" + to_string(choice - '0') + "'\n");
@@ -101,10 +101,19 @@ int main()
 			logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Replace '" + s + "' with '" + subs + "' Count: " + to_string(VectorToSaveResults.size()) + "\n");
 			break;
 		}
+		case 8:
+		{
+			int a, b;
+			cout << "Lines(a b): ";
+			cin >> a >> b;
+			testFile.SwapLines(a, b);
+			logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Swap Line " + a + " and Line " + b + "\n");
+			break;
+		}
 		default: cout << "Wrong order!" << endl; break;
 		}
 		cout << endl << "Test Program for TextWiz by xiaobsh" << endl;
-		cout << "0 Exit\t\t1 Get content\t2 Get by line\n3 Add a line\t4 Delete a line\t5 Save to file\n6 Search text\t7 Replace text" << endl << "Please enter your choice: ";
+		cout << "0 Exit\t\t1 Get content\t2 Get by line\n3 Add a line\t4 Delete a line\t5 Save to file\n6 Search text\t7 Replace text\t8 Swap lines" << endl << "Please enter your choice: ";
 		// cin >> choice;
 		choice = _getch(); cout << choice - '0' << endl;
 		logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: User entered '" + to_string(choice - '0') + "'\n");

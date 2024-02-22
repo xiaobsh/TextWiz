@@ -38,6 +38,8 @@ public:
 	std::string GetByLine(int line);
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
+	void clear();
+	void SwapLines(int Line_1, int Line_2);
 
 	// Line text
 	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults);

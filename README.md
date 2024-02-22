@@ -7,6 +7,7 @@ TextWiz is a C++ module that extends the functionality of file processing. The a
 The most basic file line processing functions.
 
 All public interfaces of the module are as follows:
+
 ```cpp
 
 class TextWiz
@@ -36,6 +37,8 @@ public:
 	std::string GetByLine(int line);
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
+	void clear();
+	void SwapLines(int Line_1, int Line_2);
 
 	// Line text
 	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults);

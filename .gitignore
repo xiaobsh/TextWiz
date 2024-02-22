@@ -365,4 +365,6 @@ FodyWeavers.xsd
 # Custom
 hosts
 *.log
-
+[Tt]o[Dd]o.md
+[Tt]o-[Dd]o.md
+TODO.md
