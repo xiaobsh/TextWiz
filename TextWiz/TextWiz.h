@@ -16,6 +16,7 @@ public:
 	~TextWiz();
 
 	// Data
+	std::vector<std::string> content;
 	// You could define a variable to save results by using `std::vector<TextWiz::TextWiz_Position> variableName`
 	struct TextWiz_Position
 	{
@@ -49,8 +50,6 @@ public:
 private:
 	std::fstream cuFile;
 	std::string fName; // make it easier to overload
-
-	std::vector<std::string> content;
 };
 
 class TextWiz_Logger

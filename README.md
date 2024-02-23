@@ -18,6 +18,7 @@ public:
 	~TextWiz();
 
 	// Data
+	std::vector<std::string> content;
 	// You could define a variable to save results by using `std::vector<TextWiz::TextWiz_Position> variableName`
 	struct TextWiz_Position
 	{
@@ -86,5 +87,5 @@ Leave the .sln file aside. It has nothing to do with you. You can just run `g++ 
 
 ## License
 
-The code is licensed under GPL v2.0. For more details, read the [LICENSE](./LICENSE) file.
+The code is licensed under Apache-2.0. For more details, read the [LICENSE](./LICENSE) file.
 
