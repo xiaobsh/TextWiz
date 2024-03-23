@@ -76,13 +76,13 @@ It can
 - Customize a logger to write a journal.
 
 
-## Compile Test Project
+## Compile Demo Project
 
 ### Windows
-Open `TextWiz.sln` in Visual Studio and it's easy to compile the test project. I have used `hosts` as the test file, but you can use any txt file for testing. Don't forget to rename your file to `hosts` if you haven't changed the code.
+Open `TextWiz.sln` in Visual Studio and it's easy to compile the demo project. I have used `TestFile.txt` as the test file, but you can use any txt file for testing. Don't forget to rename your file to `TestFile.txt` if you haven't changed the code.
 
 ### Linux
-Leave the .sln file aside. It has nothing to do with you. You can just run `g++ Test/Test.cpp TextWiz/TextWiz.cpp TextWiz/pch.hpp -o {TargetName}` to compile it. It uses the `hosts` file as well.
+Leave the .sln file aside. It has nothing to do with you. You can just run `g++ Demo/Demo.cpp TextWiz/TextWiz.cpp TextWiz/pch.hpp -o {TargetName}` to compile it. It uses the `TestFile.txt` file as well.
 
 
 ## License

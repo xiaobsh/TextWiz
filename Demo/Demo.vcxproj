@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>17.0</VCProjectVersion>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2b7cfabf-d06a-4159-9896-34e58ecd8ddb}</ProjectGuid>
+    <ProjectGuid>{BDFF1549-46AF-4A0A-B43C-43AB6DF30C62}</ProjectGuid>
     <RootNamespace>Test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Demo</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,19 +72,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)Out\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)Out\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)Out\</OutDir>
+    <OutDir>$(ProjectDir)Out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)Out\</OutDir>
+    <OutDir>$(ProjectDir)Out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)Out\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)Out\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,13 +97,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>del /f /q "$(ProjectDir)Out\ORIGIN"
-del /f /q "$(ProjectDir)Out\RESULT"
-copy /b "$(ProjectDir)ORIGIN" "$(ProjectDir)Out\ORIGIN"
-copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -119,13 +113,6 @@ copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>del /f /q "$(ProjectDir)Out\ORIGIN"
-del /f /q "$(ProjectDir)Out\RESULT"
-copy /b "$(ProjectDir)ORIGIN" "$(ProjectDir)Out\ORIGIN"
-copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,13 +125,6 @@ copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>del /f /q "$(ProjectDir)Out\ORIGIN"
-del /f /q "$(ProjectDir)Out\RESULT"
-copy /b "$(ProjectDir)ORIGIN" "$(ProjectDir)Out\ORIGIN"
-copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -161,16 +141,9 @@ copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>del /f /q "$(ProjectDir)Out\ORIGIN"
-del /f /q "$(ProjectDir)Out\RESULT"
-copy /b "$(ProjectDir)ORIGIN" "$(ProjectDir)Out\ORIGIN"
-copy /b "$(ProjectDir)RESULT" "$(ProjectDir)Out\RESULT"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Demo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

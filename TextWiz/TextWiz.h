@@ -31,21 +31,28 @@ public:
 	// Files
 	void open(std::string FileName);
 	void close();
-	std::string GetCurrentContent();
+	std::string GetCurrentContent() const;
 	void save();
 	void exit();
 
 	// Lines
-	std::string GetByLine(int line);
+	std::string GetByLine(int line) const;
 	void DelLine(int line);
 	void AddAtLine(int line, std::string text);
 	void clear();
 	void SwapLines(int Line_1, int Line_2);
+	int size() const;
+	void append(std::string text);
 
 	// Line text
-	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults);
+	int FindTextInEachLine(std::string TextToFind, std::vector<TextWiz_Position>& VectorToSaveResults) const;
 	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, std::vector<TextWiz_Position>& VectorToSaveResults);
-	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext); 
+	int ReplaceTextInEachLine(std::string TextToFind, std::string Subtext);
+
+	// Operator
+	const void operator=(const TextWiz& b);
+	const bool operator==(const TextWiz& b) const;
+	const bool operator!=(const TextWiz& b) const;
 
 private:
 	std::fstream cuFile;

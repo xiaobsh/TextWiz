@@ -10,39 +10,47 @@ TextWiz::TextWiz(std::string FileName) { open(FileName); }
 
 void TextWiz::open(std::string FileName)
 {
-	cuFile.open(FileName, std::ios::in);
+	cuFile.open(FileName, std::ios::out | std::ios::in);
 	fName = FileName;
 	content.clear();
 
 	// Pre-load
 	std::string s;
-	while (getline(cuFile, s)) content.push_back(s);
+	while (getline(cuFile, s))
+	{
+		if (s.size() > 1)
+		{
+			s = s.substr(0, s.find_last_not_of('\r') + 1);
+			content.push_back(s);
+		}
+		else content.push_back("");
+	}
 	cuFile.close();
 }
 
 void TextWiz::close() { cuFile.close(); }
 
-std::string TextWiz::GetCurrentContent()
+std::string TextWiz::GetCurrentContent() const
 {
 	std::string s;
 	for (auto&& i : content) s += i + "\n";
 	return s;
 }
 
-std::string TextWiz::GetByLine(int Line)
+std::string TextWiz::GetByLine(int Line) const
 {
-	if (Line < 1) return "";
+	if (Line < 1 || Line > size()) return "";
 	else return content[Line - 1];
 }
 
 void TextWiz::DelLine(int Line)
 {
-	if (Line > 0) content.erase(content.begin() + (Line - 1));
+	if (Line > 0 && Line < size()) content.erase(content.begin() + (Line - 1));
 }
 
 void TextWiz::AddAtLine(int Line, std::string Text)
 {
-	if (Line > 0) content.insert(content.begin() + (Line - 1), Text);
+	if (Line > 0 && Line < size()) content.insert(content.begin() + (Line - 1), Text);
 }
 
 void TextWiz::clear()
@@ -55,9 +63,19 @@ void TextWiz::SwapLines(int Line_1, int Line_2)
 	std::iter_swap(content.begin() + (Line_1 - 1), content.begin() + (Line_2 - 1));
 }
 
+int TextWiz::size() const
+{
+	return content.size();
+}
+
+void TextWiz::append(std::string text)
+{
+	content.push_back(text);
+}
+
 void TextWiz::save()
 {
-	cuFile.open(fName, std::ios::out | std::ios::in);
+	cuFile.open(fName, std::ios::out | std::ios::trunc);
 	cuFile << GetCurrentContent();
 	cuFile.close();
 }
@@ -105,7 +123,7 @@ std::string TextWiz_GetTime_Milliseconds()
 	}
 }
 
-int TextWiz::FindTextInEachLine(std::string Text, std::vector<TextWiz_Position>& VectorToSaveResults)
+int TextWiz::FindTextInEachLine(std::string Text, std::vector<TextWiz_Position>& VectorToSaveResults) const
 {
 	VectorToSaveResults.clear();
 	int count = 0;
@@ -166,6 +184,23 @@ int TextWiz::ReplaceTextInEachLine(std::string TextToFind, std::string Subtext)
 	return count;
 }
 
+const void TextWiz::operator=(const TextWiz& b)
+{
+	fName = b.fName;
+	content.clear();
+	content.insert(content.begin(), b.content.begin(), b.content.end());
+}
+
+const bool TextWiz::operator==(const TextWiz& b) const
+{
+	return(content == b.content);
+}
+
+const bool TextWiz::operator!=(const TextWiz& b) const
+{
+	return(!(content == b.content));
+}
+
 TextWiz::~TextWiz() { cuFile.close(); }
 
 
@@ -173,5 +208,4 @@ TextWiz_Logger::TextWiz_Logger(std::string FileName) { open(FileName); }
 void TextWiz_Logger::open(std::string FileName) { cuFile.open(FileName, std::ios::app); }
 void TextWiz_Logger::append(std::string Text) { cuFile << Text; }
 void TextWiz_Logger::close() { cuFile.close(); }
-
 

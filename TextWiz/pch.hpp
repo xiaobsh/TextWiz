@@ -6,6 +6,7 @@
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined(WINNT) || defined(__WINNT) || defined(__WINNT__) || defined(__WIN64) || defined(_WIN64)
 // Windows
 #include <Windows.h>
+#include <time.h>
 #define LONG_INTEGER long long
 int gettimeofday(struct timeval* tp, void* tzp)
 {
