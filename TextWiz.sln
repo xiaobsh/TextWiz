@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{F2566F38-F
 		README.md = README.md
 		Test\Test.bat = Test\Test.bat
 		Test\Test.sh = Test\Test.sh
-		Ignore\Test.yml = Ignore\Test.yml
+		.github\workflows\Test.yml = .github\workflows\Test.yml
 		Ignore\ToDo.md = Ignore\ToDo.md
 	EndProjectSection
 EndProject

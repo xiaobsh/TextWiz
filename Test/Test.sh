@@ -5,5 +5,3 @@ cp ./Test/ORIGIN ./Test/Out/ORIGIN
 cp ./Test/RESULT ./Test/Out/RESULT
 cd ./Test/Out
 ./Test.out
-# read -p "Press any key to continue . . . " -n 1
-
