@@ -85,7 +85,19 @@ Open `TextWiz.sln` in Visual Studio and it's easy to compile the demo project. I
 Leave the .sln file aside. It has nothing to do with you. You can just run `g++ Demo/Demo.cpp TextWiz/TextWiz.cpp TextWiz/pch.hpp -o {TargetName}` to compile it. It uses the `TestFile.txt` file as well.
 
 
-## License
+## Notice
+You should read both the `Demo` project and the `Test` project to avoid misusing. For instance
+```cpp
+// Line 37, Test.cpp
+testFile.FindTextInEachLine("software", VectorToSaveResults);
+for (TextWiz::TextWiz_Position i : VectorToSaveResults)
+{
+	testFile.append(to_string(i.line * i.column));
+	// testFile.DelLine(i.column); // Max: 199
+	testFile.DelLine(i.line); // Not to delete all lines that contain 'software'. Line numbers will be changed each time you delete a line. So it's suggested to delete lines from the biggest line number to reach your purpose.
+}
+```
 
+## License
 The code is licensed under Apache-2.0. For more details, read the [LICENSE](./LICENSE) file.
 

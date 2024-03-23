@@ -132,13 +132,12 @@ int TextWiz::FindTextInEachLine(std::string Text, std::vector<TextWiz_Position>&
 	for (line = 0; line < content.size(); line++)
 	{
 		column = 0;
-		while (column < content[line].length())
+		while ((column = content[line].find(Text, column)) != std::string::npos)
 		{
-			if ((column = content[line].find(Text, column)) == std::string::npos) break;
-			pos.fill(line + 1, column);
+			pos.fill(line + 1, column + 1);
 			VectorToSaveResults.push_back(pos);
+			column += Text.length();
 			count++;
-			column++;
 		}
 	}
 	return count;
@@ -153,14 +152,13 @@ int TextWiz::ReplaceTextInEachLine(std::string TextToFind, std::string Subtext, 
 	for (line = 0; line < content.size(); line++)
 	{
 		column = 0;
-		while (column < content[line].length())
+		while ((column = content[line].find(TextToFind, column)) != std::string::npos)
 		{
-			if ((column = content[line].find(TextToFind, column)) == std::string::npos) break;
 			content[line].replace(column, TextToFind.length(), Subtext);
-			pos.fill(line + 1, column);
+			pos.fill(line + 1, column + 1);
 			VectorToSaveResults.push_back(pos);
+			column += TextToFind.length();
 			count++;
-			column++;
 		}
 	}
 	return count;
@@ -173,12 +171,11 @@ int TextWiz::ReplaceTextInEachLine(std::string TextToFind, std::string Subtext)
 	for (line = 0; line < content.size(); line++)
 	{
 		column = 0;
-		while (column < content[line].length())
+		while ((column = content[line].find(TextToFind, column)) != std::string::npos)
 		{
-			if ((column = content[line].find(TextToFind, column)) == std::string::npos) break;
 			content[line].replace(column, TextToFind.length(), Subtext);
+			column += TextToFind.length();
 			count++;
-			column++;
 		}
 	}
 	return count;

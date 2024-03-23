@@ -34,8 +34,8 @@ int main()
 {
 	TextWiz testFile;
 	TextWiz_Logger logger(TextWiz_GetTime("%F") + ".log");
-	testFile.open("hosts");
-	logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Open file 'hosts'" + "\n");
+	testFile.open("TestFile.txt");
+	logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Open file 'TestFile.txt'" + "\n");
 	
 	char choice;
 	cout << "Test Program for TextWiz by xiaobsh" << endl <<endl;
@@ -89,7 +89,7 @@ int main()
 			logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Delete Line" + line + "\n");
 			break;
 		}
-		case '5': testFile.save(); logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Save file 'hosts'\n"); break;
+		case '5': testFile.save(); logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Save file 'TestFile.txt'\n"); break;
 		case '6':
 		{
 			string s;
@@ -140,7 +140,7 @@ int main()
 	}
 
 	testFile.close();
-	logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Closed file 'hosts'" + "\n");
+	logger.append("[" + TextWiz_GetTime_Milliseconds() + "] " + "Operation: Closed file 'TestFile.txt'" + "\n");
 	logger.close();
 
 	return 0;
